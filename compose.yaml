@@ -1,0 +1,56 @@
+name: schaltschrank-auftragspruefung
+services:
+  app:
+    build: .
+    ports:
+      - "127.0.0.1:${APP_PORT:-8000}:8000"
+    environment:
+      DATA_DIR: /data
+      LLM_MODE: ${LLM_MODE:-demo}
+      LLM_BASE_URL: ${LLM_BASE_URL:-https://api.openai.com/v1}
+      LLM_API_KEY: ${LLM_API_KEY:-}
+      LLM_MODEL: ${LLM_MODEL:-}
+      INTERNAL_TOKEN: ${INTERNAL_TOKEN:-local-demo-token-change-me}
+      ERP_BASE_URL: http://app:8000/mock-erp
+      ERP_TIMEOUT_SECONDS: ${ERP_TIMEOUT_SECONDS:-1}
+      N8N_WEBHOOK_URL: http://n8n:5678/webhook/auftragspruefung
+    volumes:
+      - app_data:/data
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8000/health', timeout=2)"]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+    restart: unless-stopped
+  n8n:
+    image: docker.n8n.io/n8nio/n8n:2.0.3
+    entrypoint: ["/bin/sh", "/config/start.sh"]
+    ports:
+      - "127.0.0.1:${N8N_PORT:-5678}:5678"
+    environment:
+      INTERNAL_TOKEN: ${INTERNAL_TOKEN:-local-demo-token-change-me}
+      N8N_ENCRYPTION_KEY: ${N8N_ENCRYPTION_KEY:-local-demo-encryption-key-change-me}
+      N8N_BLOCK_ENV_ACCESS_IN_NODE: "false"
+      N8N_SECURE_COOKIE: "false"
+      N8N_DIAGNOSTICS_ENABLED: "false"
+      N8N_VERSION_NOTIFICATIONS_ENABLED: "false"
+      N8N_PERSONALIZATION_ENABLED: "false"
+      N8N_RUNNERS_ENABLED: "false"
+      GENERIC_TIMEZONE: Europe/Berlin
+      TZ: Europe/Berlin
+    volumes:
+      - n8n_data:/home/node/.n8n
+      - ./n8n:/config:ro
+    depends_on:
+      app:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "node", "-e", "fetch('http://localhost:5678/healthz').then(r=>{if(!r.ok)process.exit(1)}).catch(()=>process.exit(1))"]
+      interval: 5s
+      timeout: 3s
+      retries: 30
+      start_period: 30s
+    restart: unless-stopped
+volumes:
+  app_data:
+  n8n_data:

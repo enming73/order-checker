@@ -1,0 +1,112 @@
+{
+  "order_number": [
+    {
+      "value": "AB-2026-0141",
+      "evidence": {
+        "source_id": "email",
+        "source_type": "email",
+        "attachment_name": null,
+        "page": null,
+        "quote": "Auftragsnummer: AB-2026-0141"
+      }
+    },
+    {
+      "value": "AB-2026-0141",
+      "evidence": {
+        "source_id": "pdf-0-1",
+        "source_type": "pdf",
+        "attachment_name": "Technische-Unterlagen-A.pdf",
+        "page": 1,
+        "quote": "Auftragsnummer: AB-2026-0141"
+      }
+    }
+  ],
+  "drawing_number": [
+    {
+      "value": "SZ-4101",
+      "evidence": {
+        "source_id": "email",
+        "source_type": "email",
+        "attachment_name": null,
+        "page": null,
+        "quote": "Zeichnungsnummer: SZ-4101"
+      }
+    },
+    {
+      "value": "SZ-4101",
+      "evidence": {
+        "source_id": "pdf-0-1",
+        "source_type": "pdf",
+        "attachment_name": "Technische-Unterlagen-A.pdf",
+        "page": 1,
+        "quote": "Zeichnungsnummer: SZ-4101"
+      }
+    }
+  ],
+  "drawing_revision": [
+    {
+      "value": "Rev. A",
+      "evidence": {
+        "source_id": "email",
+        "source_type": "email",
+        "attachment_name": null,
+        "page": null,
+        "quote": "Zeichnungsstand: Rev. A"
+      }
+    },
+    {
+      "value": "Rev. A",
+      "evidence": {
+        "source_id": "pdf-0-1",
+        "source_type": "pdf",
+        "attachment_name": "Technische-Unterlagen-A.pdf",
+        "page": 1,
+        "quote": "Zeichnungsstand: Rev. A"
+      }
+    }
+  ],
+  "ip_rating": [
+    {
+      "value": "IP54",
+      "evidence": {
+        "source_id": "email",
+        "source_type": "email",
+        "attachment_name": null,
+        "page": null,
+        "quote": "IP-Schutzart: IP54"
+      }
+    },
+    {
+      "value": "IP54",
+      "evidence": {
+        "source_id": "pdf-0-1",
+        "source_type": "pdf",
+        "attachment_name": "Technische-Unterlagen-A.pdf",
+        "page": 1,
+        "quote": "IP-Schutzart: IP54"
+      }
+    }
+  ],
+  "quantity": [
+    {
+      "value": "2",
+      "evidence": {
+        "source_id": "email",
+        "source_type": "email",
+        "attachment_name": null,
+        "page": null,
+        "quote": "Stückzahl: 2"
+      }
+    },
+    {
+      "value": "2",
+      "evidence": {
+        "source_id": "pdf-0-1",
+        "source_type": "pdf",
+        "attachment_name": "Technische-Unterlagen-A.pdf",
+        "page": 1,
+        "quote": "Stückzahl: 2"
+      }
+    }
+  ]
+}

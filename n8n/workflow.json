@@ -1,0 +1,399 @@
+{
+  "id": "schaltschrankReview01",
+  "name": "Schaltschrank · Technische Vorprüfung",
+  "active": false,
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "auftragspruefung",
+        "responseMode": "onReceived",
+        "options": {}
+      },
+      "id": "ingress",
+      "name": "Auftrag empfangen",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        0,
+        0
+      ],
+      "webhookId": "order-review-webhook"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "http://app:8000/internal/steps/parse",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "X-Internal-Token",
+              "value": "={{ $env.INTERNAL_TOKEN }}"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ { case_id: $('Auftrag empfangen').item.json.body.case_id, run_id: $('Auftrag empfangen').item.json.body.run_id } }}",
+        "options": {
+          "timeout": 90000
+        }
+      },
+      "id": "parse",
+      "name": "E-Mail und PDF lesen",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        260,
+        0
+      ],
+      "onError": "continueErrorOutput"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "ok-parse",
+              "leftValue": "={{ $json.ok }}",
+              "rightValue": true,
+              "operator": {
+                "type": "boolean",
+                "operation": "true",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "if-parse",
+      "name": "E-Mail und PDF lesen – erfolgreich?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        500,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "http://app:8000/internal/steps/extract",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "X-Internal-Token",
+              "value": "={{ $env.INTERNAL_TOKEN }}"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ { case_id: $('Auftrag empfangen').item.json.body.case_id, run_id: $('Auftrag empfangen').item.json.body.run_id } }}",
+        "options": {
+          "timeout": 90000
+        }
+      },
+      "id": "extract",
+      "name": "Felder und Belege extrahieren",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        780,
+        0
+      ],
+      "onError": "continueErrorOutput"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "ok-extract",
+              "leftValue": "={{ $json.ok }}",
+              "rightValue": true,
+              "operator": {
+                "type": "boolean",
+                "operation": "true",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "if-extract",
+      "name": "Felder und Belege extrahieren – erfolgreich?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        1020,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "http://app:8000/internal/steps/validate",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "X-Internal-Token",
+              "value": "={{ $env.INTERNAL_TOKEN }}"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ { case_id: $('Auftrag empfangen').item.json.body.case_id, run_id: $('Auftrag empfangen').item.json.body.run_id } }}",
+        "options": {
+          "timeout": 90000
+        }
+      },
+      "id": "validate",
+      "name": "Regeln und ERP abgleichen",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1300,
+        0
+      ],
+      "onError": "continueErrorOutput"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "ok-validate",
+              "leftValue": "={{ $json.ok }}",
+              "rightValue": true,
+              "operator": {
+                "type": "boolean",
+                "operation": "true",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "if-validate",
+      "name": "Regeln und ERP abgleichen – erfolgreich?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        1540,
+        0
+      ]
+    },
+    {
+      "parameters": {},
+      "id": "done",
+      "name": "Bereit zur Prüfung",
+      "type": "n8n-nodes-base.noOp",
+      "typeVersion": 1,
+      "position": [
+        1820,
+        0
+      ]
+    },
+    {
+      "parameters": {},
+      "id": "manual",
+      "name": "Manuelle Prüfung oder alter Lauf",
+      "type": "n8n-nodes-base.noOp",
+      "typeVersion": 1,
+      "position": [
+        1040,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "http://app:8000/internal/failure",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "X-Internal-Token",
+              "value": "={{ $env.INTERNAL_TOKEN }}"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ { case_id: $('Auftrag empfangen').item.json.body.case_id, run_id: $('Auftrag empfangen').item.json.body.run_id, step: 'transport' } }}",
+        "options": {
+          "timeout": 10000
+        }
+      },
+      "id": "failure",
+      "name": "Verbindungsfehler speichern",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1040,
+        500
+      ],
+      "retryOnFail": true,
+      "maxTries": 3,
+      "waitBetweenTries": 1000
+    }
+  ],
+  "connections": {
+    "E-Mail und PDF lesen": {
+      "main": [
+        [
+          {
+            "node": "E-Mail und PDF lesen – erfolgreich?",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Verbindungsfehler speichern",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "E-Mail und PDF lesen – erfolgreich?": {
+      "main": [
+        [
+          {
+            "node": "Felder und Belege extrahieren",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Manuelle Prüfung oder alter Lauf",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Felder und Belege extrahieren": {
+      "main": [
+        [
+          {
+            "node": "Felder und Belege extrahieren – erfolgreich?",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Verbindungsfehler speichern",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Felder und Belege extrahieren – erfolgreich?": {
+      "main": [
+        [
+          {
+            "node": "Regeln und ERP abgleichen",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Manuelle Prüfung oder alter Lauf",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Regeln und ERP abgleichen": {
+      "main": [
+        [
+          {
+            "node": "Regeln und ERP abgleichen – erfolgreich?",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Verbindungsfehler speichern",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Regeln und ERP abgleichen – erfolgreich?": {
+      "main": [
+        [
+          {
+            "node": "Bereit zur Prüfung",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Manuelle Prüfung oder alter Lauf",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Auftrag empfangen": {
+      "main": [
+        [
+          {
+            "node": "E-Mail und PDF lesen",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1",
+    "saveDataSuccessExecution": "all",
+    "saveDataErrorExecution": "all"
+  },
+  "versionId": "a09a10ce-d023-47bf-93c7-ae8c168eb0cd",
+  "pinData": {},
+  "tags": []
+}

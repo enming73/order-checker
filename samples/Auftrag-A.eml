@@ -1,0 +1,61 @@
+From: Lena Beispiel <einkauf@nordwerk.example>
+To: technik@schaltschrank.example
+Subject: Bestellung AB-2026-0141 =?utf-8?b?4oCT?= Muster A
+Date: Thu, 12 Nov 2026 09:00:00 +0100
+Message-ID: <demo-A@nordwerk.example>
+MIME-Version: 1.0
+Content-Type: multipart/mixed; boundary="demo-order-A-stable-boundary"
+
+--demo-order-A-stable-boundary
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 8bit
+
+Guten Tag,
+
+bitte fertigen Sie die Schaltschränke gemäß folgenden Angaben:
+
+Auftragsnummer: AB-2026-0141
+Zeichnungsnummer: SZ-4101
+Zeichnungsstand: Rev. A
+Stückzahl: 2
+IP-Schutzart: IP54
+
+Die technischen Unterlagen finden Sie im Anhang.
+
+Mit freundlichen Grüßen
+Lena Beispiel
+
+--demo-order-A-stable-boundary
+Content-Type: application/pdf
+Content-Transfer-Encoding: base64
+Content-Disposition: attachment; filename="Technische-Unterlagen-A.pdf"
+MIME-Version: 1.0
+
+JVBERi0xLjMKJeLjz9MKMSAwIG9iago8PAovUHJvZHVjZXIgKHB5cGRmKQo+PgplbmRvYmoKMiAw
+IG9iago8PAovVHlwZSAvUGFnZXMKL0NvdW50IDEKL0tpZHMgWyA0IDAgUiBdCj4+CmVuZG9iagoz
+IDAgb2JqCjw8Ci9UeXBlIC9DYXRhbG9nCi9QYWdlcyAyIDAgUgo+PgplbmRvYmoKNCAwIG9iago8
+PAovVHlwZSAvUGFnZQovUmVzb3VyY2VzIDw8Ci9Gb250IDw8Ci9GMSA1IDAgUgo+Pgo+PgovTWVk
+aWFCb3ggWyAwLjAgMC4wIDU5NSA4NDIgXQovUGFyZW50IDIgMCBSCi9Db250ZW50cyA2IDAgUgo+
+PgplbmRvYmoKNSAwIG9iago8PAovVHlwZSAvRm9udAovU3VidHlwZSAvVHlwZTEKL0Jhc2VGb250
+IC9IZWx2ZXRpY2EKL0VuY29kaW5nIC9XaW5BbnNpRW5jb2RpbmcKPj4KZW5kb2JqCjYgMCBvYmoK
+PDwKL0xlbmd0aCA4MDUKPj4Kc3RyZWFtCjAuMDggMC4yIDAuMjIgcmcKQlQgL0YxIDIyIFRmIDQ1
+IDc3MCBUZCA8NTQ0NTQzNDg0ZTQ5NTM0MzQ4NDUyMDU1NGU1NDQ1NTI0YzQxNDc0NTRlPiBUaiBF
+VApCVCAvRjEgMTEgVGYgNDUgNzQyIFRkIDw0ZDc1NzM3NDY1NzIyMDQxMjAyZjIwNDY2OTZiNzQ2
+OTc2NjUyMDRlNmY3MjY0Nzc2NTcyNmIyMDQxNmU2YzYxNjc2NTZlNjI2MTc1MjA0NzZkNjI0OD4g
+VGogRVQKQlQgL0YxIDE0IFRmIDQ1IDY2MCBUZCA8NDE3NTY2NzQ3MjYxNjc3MzZlNzU2ZDZkNjU3
+MjNhMjA0MTQyMmQzMjMwMzIzNjJkMzAzMTM0MzE+IFRqIEVUCkJUIC9GMSAxNCBUZiA0NSA2MjAg
+VGQgPDVhNjU2OTYzNjg2ZTc1NmU2NzczNmU3NTZkNmQ2NTcyM2EyMDUzNWEyZDM0MzEzMDMxPiBU
+aiBFVApCVCAvRjEgMTQgVGYgNDUgNTgwIFRkIDw1YTY1Njk2MzY4NmU3NTZlNjc3MzczNzQ2MTZl
+NjQzYTIwNTI2NTc2MmUyMDQxPiBUaiBFVApCVCAvRjEgMTQgVGYgNDUgNTQwIFRkIDw1Mzc0ZmM2
+MzZiN2E2MTY4NmMzYTIwMzI+IFRqIEVUCkJUIC9GMSAxNCBUZiA0NSA1MDAgVGQgPDQ5NTAyZDUz
+NjM2ODc1NzQ3YTYxNzI3NDNhMjA0OTUwMzUzND4gVGogRVQKQlQgL0YxIDEwIFRmIDQ1IDkwIFRk
+IDw0ZTc1NzIyMDQ0NjU2ZDZmNmU3Mzc0NzI2MTc0Njk2ZjZlMmUyMDRiNjU2OTZlNjUyMDQ2NjU3
+Mjc0Njk2Nzc1NmU2NzczNjY3MjY1Njk2NzYxNjI2NTJlMjA0YjY1Njk2ZTY1MjA3MjY1NjE2YzY1
+NmUyMDRiNzU2ZTY0NjU2ZTY0NjE3NDY1NmUyZT4gVGogRVQKQlQgL0YxIDEwIFRmIDQ1IDcwIFRk
+IDw1MzY1Njk3NDY1MjAzMTIwMmYyMDMxPiBUaiBFVAoKZW5kc3RyZWFtCmVuZG9iagp4cmVmCjAg
+NwowMDAwMDAwMDAwIDY1NTM1IGYgCjAwMDAwMDAwMTUgMDAwMDAgbiAKMDAwMDAwMDA1NCAwMDAw
+MCBuIAowMDAwMDAwMTEzIDAwMDAwIG4gCjAwMDAwMDAxNjIgMDAwMDAgbiAKMDAwMDAwMDI5NCAw
+MDAwMCBuIAowMDAwMDAwMzkxIDAwMDAwIG4gCnRyYWlsZXIKPDwKL1NpemUgNwovUm9vdCAzIDAg
+UgovSW5mbyAxIDAgUgo+PgpzdGFydHhyZWYKMTI0NwolJUVPRgo=
+
+--demo-order-A-stable-boundary--

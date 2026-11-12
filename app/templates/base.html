@@ -1,0 +1,9 @@
+<!doctype html>
+<html lang="de">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="icon" href="/static/favicon.svg" type="image/svg+xml"><title>{% block title %}Auftragsprüfung{% endblock %} · Werkprüfung</title><link rel="stylesheet" href="/static/style.css"><script src="/static/app.js" defer></script></head>
+<body>
+<header><a class="brand" href="/"><span class="brandmark">W<span>▦</span></span> WERKPRÜFUNG <small>TECHNIK & AUTOMATION</small></a><span class="role">● &nbsp;Demo-Ingenieur/in</span></header>
+<div class="mode">{% if mode == 'demo' %}<span class="dot"></span> Demo-Modus · vorbereitete KI-Antworten{% else %}<span class="dot live"></span> Live-Modus · KI-Extraktion{% endif %}<span>Fiktive Aufträge · Simuliertes ERP</span></div>
+<main>{% block content %}{% endblock %}</main>
+<footer><span>KI-gestützte Auftragsprüfung im Schaltschrankbau</span><span>Entscheidung durch den Menschen. Nachvollziehbar dokumentiert.</span></footer>
+</body></html>
